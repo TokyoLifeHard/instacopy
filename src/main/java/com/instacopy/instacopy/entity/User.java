@@ -13,6 +13,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -23,10 +24,10 @@ public class User {
     private String name;
 
     @Column(nullable = false)
-    private String lastName;
+    private String lastname;
 
     @Column(unique = true, updatable = false)
-    private String userName;
+    private String username;
 
     @Column(unique = true)
     private String email;
@@ -52,8 +53,6 @@ public class User {
     @Column(updatable = false)
     private LocalDateTime createDate;
 
-    public User() {
-    }
 
     @PrePersist
     protected void onCreate(){
