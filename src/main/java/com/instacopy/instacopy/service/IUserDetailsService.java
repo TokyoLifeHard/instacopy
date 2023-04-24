@@ -29,6 +29,10 @@ public class IUserDetailsService implements UserDetailsService {
         return build(user);
     }
 
+    public UserDetails loadUserById(Long id){
+        return userRepository.findUserById(id).
+                orElseThrow(()->new UsernameNotFoundException("User with id "+id+" not found"));
+    }
     public static User build(User user){
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.name()))
