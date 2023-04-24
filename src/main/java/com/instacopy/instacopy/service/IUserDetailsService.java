@@ -29,7 +29,7 @@ public class IUserDetailsService implements UserDetailsService {
         return build(user);
     }
 
-    public UserDetails loadUserById(Long id){
+    public User loadUserById(Long id){
         return userRepository.findUserById(id).
                 orElseThrow(()->new UsernameNotFoundException("User with id "+id+" not found"));
     }
