@@ -14,12 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class IUserDetailsService implements UserDetailsService {
-
-    private final UserRepository userRepository;
     @Autowired
-    public IUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) {
