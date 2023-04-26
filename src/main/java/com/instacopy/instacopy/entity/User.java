@@ -54,6 +54,8 @@ public class User implements UserDetails {
     @Column(updatable = false)
     private LocalDateTime createDate;
 
+    public User() {
+    }
 
     @PrePersist
     protected void onCreate(){
