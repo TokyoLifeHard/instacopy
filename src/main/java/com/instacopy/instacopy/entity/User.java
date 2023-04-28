@@ -12,7 +12,7 @@ import java.util.*;
 
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "app_user")
 public class User implements UserDetails {
 
     @Id
@@ -37,6 +37,7 @@ public class User implements UserDetails {
     @Column(length = 300)
     private String password;
 
+    @Transient
     private Collection<? extends GrantedAuthority> authorities;
 
     @ElementCollection(targetClass = Role.class)
