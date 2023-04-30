@@ -19,7 +19,7 @@ public class Comment {
     private String username;
 
     @Column(nullable = false)
-    private Long UserId;
+    private Long userId;
 
     @Column(columnDefinition = "text",nullable = false)
     private String mesasge;

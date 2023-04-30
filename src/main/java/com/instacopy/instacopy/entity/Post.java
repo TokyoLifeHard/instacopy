@@ -30,11 +30,11 @@ public class Post {
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "post", orphanRemoval = true)
     private List<Comment> commets = new ArrayList<>();
     @Column(updatable = false)
-    protected LocalDateTime createDate;
+    protected LocalDateTime createdDate;
 
     @PrePersist
     protected void onCreate(){
-        this.createDate = LocalDateTime.now();
+        this.createdDate = LocalDateTime.now();
     }
 
 }
