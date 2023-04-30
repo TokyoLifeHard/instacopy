@@ -20,20 +20,20 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/api/auth")
 @PreAuthorize("permitAll()")
 public class AuthController {
 
     @Autowired
-    private JWTTokenProvider jwtTokenProvider;
+    JWTTokenProvider jwtTokenProvider;
     @Autowired
-    private AuthenticationManager authenticationManager;
+    AuthenticationManager authenticationManager;
     @Autowired
-    private UserService userService;
+    UserService userService;
     @Autowired
-    private ResposeErrorValidation resposeErrorValidation;
+    ResposeErrorValidation resposeErrorValidation;
 
     @PostMapping("/signin")
     public ResponseEntity<Object> authenticateUser(@Valid @RequestBody LoginRequest loginRequest,
@@ -53,7 +53,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<Object> registrateUser(@Valid @RequestBody SighupRequest sighupRequest,
+    public ResponseEntity<Object> registerUser(@Valid @RequestBody SighupRequest sighupRequest,
                                                  BindingResult bindingResult){
         ResponseEntity<Object> errors = resposeErrorValidation.mapValidationService(bindingResult);
         if(!ObjectUtils.isEmpty(errors)) return errors;
