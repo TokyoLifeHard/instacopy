@@ -14,22 +14,21 @@ import java.util.Map;
 @Service
 public class ResposeErrorValidation {
 
-    public ResponseEntity<Object> mapValidationService(BindingResult result){
-        if (result.hasErrors()){
+    public ResponseEntity<Object> mapValidationService(BindingResult result) {
+        if (result.hasErrors()) {
+            Map<String, String> errorMap = new HashMap<>();
 
-            Map<String,String> errorsMap = new HashMap<>();
-
-            if (!CollectionUtils.isEmpty(result.getAllErrors())){
+            if (!CollectionUtils.isEmpty(result.getAllErrors())) {
                 for (ObjectError error : result.getAllErrors()) {
-                    errorsMap.put(error.getCode(),error.getDefaultMessage());
+                    errorMap.put(error.getCode(), error.getDefaultMessage());
                 }
             }
-            for (FieldError error : result.getFieldErrors()) {
-                errorsMap.put(error.getField(),error.getDefaultMessage());
-            }
-            return new ResponseEntity<>(errorsMap, HttpStatus.BAD_REQUEST);
-        }
 
+            for (FieldError error : result.getFieldErrors()) {
+                errorMap.put(error.getField(), error.getDefaultMessage());
+            }
+            return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
+        }
         return null;
     }
 }
