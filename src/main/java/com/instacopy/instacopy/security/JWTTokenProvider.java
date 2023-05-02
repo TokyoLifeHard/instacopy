@@ -26,7 +26,7 @@ public class JWTTokenProvider {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("id",userId);
-        claims.put("username",user.getUsername());
+        claims.put("username",user.getEmail());
         claims.put("firstname",user.getName());
         claims.put("lastname",user.getLastname());
 
@@ -35,7 +35,7 @@ public class JWTTokenProvider {
                 .addClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.ES512,SecurityConstans.SECRET)
+                .signWith(SignatureAlgorithm.HS512,SecurityConstans.SECRET)
                 .compact();
     }
 

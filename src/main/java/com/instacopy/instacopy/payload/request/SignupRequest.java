@@ -2,13 +2,12 @@ package com.instacopy.instacopy.payload.request;
 
 import com.instacopy.instacopy.annotations.PasswordMatchers;
 import com.instacopy.instacopy.annotations.ValidEmail;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
 @PasswordMatchers
-public class SighupRequest {
+public class SignupRequest {
 
     @Email(message = "It shoud have email format")
     @NotBlank(message = "User email is required")
@@ -25,11 +24,8 @@ public class SighupRequest {
     private String username;
 
     @NotEmpty(message = "User email is required")
-    @Size(min = 8)
+    @Size(min = 6)
     private String password;
-
-    @NotEmpty(message = "User email is required")
-    @Size(min = 8)
-    private String confimPassword;
+    private String confirmPassword;
 
 }

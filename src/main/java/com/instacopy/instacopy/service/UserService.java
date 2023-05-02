@@ -3,7 +3,7 @@ package com.instacopy.instacopy.service;
 import com.instacopy.instacopy.entity.Role;
 import com.instacopy.instacopy.entity.User;
 import com.instacopy.instacopy.exeptions.UserExistExeption;
-import com.instacopy.instacopy.payload.request.SighupRequest;
+import com.instacopy.instacopy.payload.request.SignupRequest;
 import com.instacopy.instacopy.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User createUser(SighupRequest sighupRequest){
+    public User createUser(SignupRequest sighupRequest){
         User user = new User();
         user.setEmail(sighupRequest.getEmail());
         user.setName(sighupRequest.getFirstname());

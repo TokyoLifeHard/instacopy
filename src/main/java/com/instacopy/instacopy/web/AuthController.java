@@ -1,7 +1,7 @@
 package com.instacopy.instacopy.web;
 
 import com.instacopy.instacopy.payload.request.LoginRequest;
-import com.instacopy.instacopy.payload.request.SighupRequest;
+import com.instacopy.instacopy.payload.request.SignupRequest;
 import com.instacopy.instacopy.payload.response.JWTTokenSuccessResponse;
 import com.instacopy.instacopy.payload.response.MessageResponse;
 import com.instacopy.instacopy.security.JWTTokenProvider;
@@ -9,6 +9,8 @@ import com.instacopy.instacopy.security.SecurityConstans;
 import com.instacopy.instacopy.service.UserService;
 import com.instacopy.instacopy.validations.ResposeErrorValidation;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 @PreAuthorize("permitAll()")
 public class AuthController {
-
+    private final  static  Logger LOG = LoggerFactory.getLogger(AuthController.class);
     @Autowired
     JWTTokenProvider jwtTokenProvider;
     @Autowired
@@ -47,13 +49,15 @@ public class AuthController {
                 loginRequest.getPassword()
         ));
 
+        LOG.info("Principal ".toUpperCase()+authentication.getPrincipal().toString());
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = SecurityConstans.TOKEN_PREFIX + jwtTokenProvider.generateToken(authentication);
         return ResponseEntity.ok(new JWTTokenSuccessResponse(true,jwt));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<Object> registerUser(@Valid @RequestBody SighupRequest sighupRequest,
+    public ResponseEntity<Object> registerUser(@Valid @RequestBody SignupRequest sighupRequest,
                                                  BindingResult bindingResult){
         ResponseEntity<Object> errors = resposeErrorValidation.mapValidationService(bindingResult);
         if(!ObjectUtils.isEmpty(errors)) return errors;
