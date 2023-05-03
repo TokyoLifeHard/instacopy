@@ -1,5 +1,6 @@
 package com.instacopy.instacopy.service;
 
+import com.instacopy.instacopy.dto.UserDTO;
 import com.instacopy.instacopy.entity.Role;
 import com.instacopy.instacopy.entity.User;
 import com.instacopy.instacopy.exeptions.UserExistExeption;
@@ -8,8 +9,11 @@ import com.instacopy.instacopy.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 
 @Service
 public class UserService {
@@ -36,6 +40,21 @@ public class UserService {
             LOG.error("Error during registration {}",e.getMessage());
             throw new UserExistExeption("User "+user.getUsername()+" is already exist");
         }
+    }
 
+    public User updateUser(UserDTO userDTO, Principal principal){
+        User user = getUserByPrincipal(principal);
+        user.setName(userDTO.getFirstname());
+        user.setLastname(user.getLastname());
+        user.setBiography(userDTO.getBiography());
+        return userRepository.save(user);
+    }
+    public User getCurrentUser(Principal principal){
+        return getUserByPrincipal(principal);
+    }
+    private User getUserByPrincipal(Principal principal){
+        String username = principal.getName();
+       return userRepository.findUserByUsername(username)
+               .orElseThrow(()->new UsernameNotFoundException("User with username "+username+" not found"));
     }
 }
