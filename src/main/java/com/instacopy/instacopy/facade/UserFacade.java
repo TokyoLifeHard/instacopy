@@ -2,7 +2,9 @@ package com.instacopy.instacopy.facade;
 
 import com.instacopy.instacopy.dto.UserDTO;
 import com.instacopy.instacopy.entity.User;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserFacade {
 
     public UserDTO userToUserDTO(User user){
