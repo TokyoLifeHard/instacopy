@@ -19,16 +19,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CommetService {
+public class CommentService {
 
-    public static final Logger LOG = LoggerFactory.getLogger(CommetService.class);
+    public static final Logger LOG = LoggerFactory.getLogger(CommentService.class);
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
     private final UserRepository userRepository;
 
     @Autowired
-    public CommetService(CommentRepository commentRepository, PostRepository postRepository, UserRepository userRepository) {
+    public CommentService(CommentRepository commentRepository, PostRepository postRepository, UserRepository userRepository) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
         this.userRepository = userRepository;
