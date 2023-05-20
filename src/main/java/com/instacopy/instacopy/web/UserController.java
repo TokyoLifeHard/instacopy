@@ -4,7 +4,7 @@ import com.instacopy.instacopy.dto.UserDTO;
 import com.instacopy.instacopy.entity.User;
 import com.instacopy.instacopy.facade.UserFacade;
 import com.instacopy.instacopy.service.UserService;
-import com.instacopy.instacopy.validations.ResposeErrorValidation;
+import com.instacopy.instacopy.validations.ResponseErrorValidation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private UserFacade userFacade;
     @Autowired
-    private ResposeErrorValidation resposeErrorValidation;
+    private ResponseErrorValidation resposeErrorValidation;
 
     @GetMapping("/")
     public ResponseEntity<UserDTO> getCurrentUser(Principal principal){

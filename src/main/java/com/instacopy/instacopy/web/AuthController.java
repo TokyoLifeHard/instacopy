@@ -7,7 +7,7 @@ import com.instacopy.instacopy.payload.response.MessageResponse;
 import com.instacopy.instacopy.security.JWTTokenProvider;
 import com.instacopy.instacopy.security.SecurityConstans;
 import com.instacopy.instacopy.service.UserService;
-import com.instacopy.instacopy.validations.ResposeErrorValidation;
+import com.instacopy.instacopy.validations.ResponseErrorValidation;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public class AuthController {
     @Autowired
     UserService userService;
     @Autowired
-    ResposeErrorValidation resposeErrorValidation;
+    ResponseErrorValidation resposeErrorValidation;
 
     @PostMapping("/signin")
     public ResponseEntity<Object> authenticateUser(@Valid @RequestBody LoginRequest loginRequest,
